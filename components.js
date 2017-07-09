@@ -17,7 +17,7 @@ export class BeerListContainer extends Component {
     render() {
         return (
             <div>
-                <InputArea/>
+                <InputArea onSubmit={this.addItem}/>
                 <BeerList/>
             </div>
         )
@@ -28,6 +28,7 @@ export class InputArea extends Component {
     render() {
         return <input/>
     }
+
 }
 
 export class BeerList extends Component {

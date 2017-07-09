@@ -22,4 +22,11 @@ describe('BeerListContainer', () => {
         wrapper.instance().addItem('Sam Adams');
         expect(wrapper.state('beers')).to.eql(['Sam Adams']);
     });
+
+    it('passes adItem to InputArea', () => {
+        const wrapper = shallow(<BeerListContainer/>);
+        const inputArea = wrapper.find(InputArea);
+        const addItem = wrapper.instance().addItem;
+        expect(inputArea.prop('onSubmit')).to.eql(addItem);
+    })
 });
