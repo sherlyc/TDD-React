@@ -37,6 +37,13 @@ describe('BeerListContainer', () => {
         inputArea.prop('onSubmit')('Sam Adams');
         expect(wrapper.state('beers')).to.eql(['Sam Adams']);
     })
+
+    it('renders the items', () => {
+        const wrapper = mount(<BeerListContainer/>)
+        wrapper.instance().addItem('Sam Adams')
+        wrapper.instance().addItem('Resin')
+        expect(wrapper.find('li').length).to.equal(2)
+    })
 });
 
 describe('InputArea', () => {
@@ -66,5 +73,23 @@ describe('InputArea', () => {
 
         expect(addItemSpy.calledOnce).to.equal(true);
         expect(addItemSpy.calledWith('Octoberfest')).to.equal(true);
+    })
+})
+
+describe('BeerList', () => {
+    it('should render zero items', () => {
+        const wrapper = shallow(<BeerList items={[]}/>)
+        expect(wrapper.find('li')).to.have.length(0)
+    })
+
+    it('should render undefined items', () =>{
+        const wrapper = shallow(<BeerList items={undefined}/>)
+        expect(wrapper.find('li')).to.have.length(0)
+    })
+
+    it('should render some items', () => {
+        const items = ['Sam Adams', 'Resin', 'Octoberfest']
+        const wrapper = shallow(<BeerList items={items}/>)
+        expect(wrapper.find('li')).to.have.length(3)
     })
 })
